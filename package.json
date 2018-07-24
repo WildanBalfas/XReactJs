@@ -1,0 +1,27 @@
+{
+  "name": "xreactjs",
+  "version": "1.0.0",
+  "description": "REACTJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set PORT=3330 && npm run build && react-scripts start",
+    "build": "react-scripts build"
+  },
+  "keywords": [
+    "Belajar",
+    "ReactJS"
+  ],
+  "author": "wildan",
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^1.4.0",
+    "@material-ui/icons": "^1.1.0",
+    "g": "^2.0.1",
+    "material-ui": "^0.20.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^1.1.4"
+  }
+}
