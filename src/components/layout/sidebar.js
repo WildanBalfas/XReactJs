@@ -4,6 +4,7 @@ import { Home, Help } from '../content';
 import { Link, Route } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import HomeIcon from '@material-ui/icons/Home';
+import UserIcon from '@material-ui/icons/SupervisorAccount';
 import HelpIcon from '@material-ui/icons/Help';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -26,9 +27,9 @@ export default class SideBar extends React.Component {
                     </div>
                     <Divider />
                     <List onClick={() => onSelected()}>
-                        <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/" className={classes.MenuList}>Home</Link></ListItem>
-                        <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/users" className={classes.MenuList}>Users</Link></ListItem>
-                        <ListItem className={classes.ListItem}><HelpIcon className={classes.MenuIcon} /><Link to="/help" className={classes.MenuList}>Help</Link></ListItem>
+                        <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/" className={classes.MenuList}> Home</Link></ListItem>
+                        <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/users" className={classes.MenuList}> Users</Link></ListItem>
+                        <ListItem className={classes.ListItem}><HelpIcon className={classes.MenuIcon} /><Link to="/help" className={classes.MenuList}> Help</Link></ListItem>
                     </List>
                 </Drawer>
                 <Route exact path="/" component={Home} />

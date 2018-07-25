@@ -4,7 +4,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import EditIcon from '@material-ui/icons/Edit';
+import DelIcon from '@material-ui/icons/Delete';
 import Create from './create';
+import Edit from './edit';
+import IconButton from '@material-ui/core/IconButton';
 
 export default class extends React.Component {
     constructor(props) {
@@ -12,14 +16,14 @@ export default class extends React.Component {
         this.state = {
             users: [
                 {
-                    "_id": "5b568baf016de931bcdc3a50",
-                    "userName": "Doni",
-                    "password": "DoniAja",
-                    "email": "rama_doni17@ymail.commm",
+                    "_id": "1",
+                    "userName": "wildan",
+                    "password": "wildan123",
+                    "email": "wildan@gmail.commm",
                     "name": {
-                        "first": "Ramadhoni",
-                        "mid": "Suryo",
-                        "last": "Suharto"
+                        "first": "M",
+                        "mid": "Wildan",
+                        "last": "Balfas"
                     },
                     "phone": "08123123123",
                     "active": "1"
@@ -27,7 +31,7 @@ export default class extends React.Component {
                 },
 
                 {
-                    "_id": "5b56fa64a858580014320a2f",
+                    "_id": "2",
                     "userName": "Mbappe",
                     "password": "MbappeAja",
                     "email": "mbappeaja@yahoo.com",
@@ -41,7 +45,7 @@ export default class extends React.Component {
                 },
 
                 {
-                    "_id": "5b56fa64a858580014320a2b",
+                    "_id": "3",
                     "userName": "iningasal",
                     "password": "asalaja",
                     "email": "asalaja.com",
@@ -80,6 +84,11 @@ export default class extends React.Component {
                 [name]: value
             }
         })
+    }
+
+    handleDelete = (n) => {
+        this.state.users.splice(n, 1);
+        this.setState(this.state.users);
     }
 
     handleSubmit = () => {
@@ -141,6 +150,10 @@ export default class extends React.Component {
                                     <TableCell>{n.email}</TableCell>
                                     <TableCell>{n.phone}</TableCell>
                                     <TableCell>{n.active}</TableCell>
+                                    <IconButton><Edit createNew={this.state.createNew} handleToggle={this.handleToggle}
+                                        handleClose={this.handleClose} handleChange={this.handleChange} user={this.state.user}
+                                        handleSubmit={this.handleSubmit} /></IconButton>
+                                    <IconButton><DelIcon color="primary" onClick={() => this.handleDelete(users.indexOf(n))} /></IconButton>
                                 </TableRow>
                             );
                         })}
