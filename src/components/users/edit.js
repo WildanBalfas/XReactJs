@@ -6,14 +6,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import EditIcon from '@material-ui/icons/Edit';
 
 
-export default ({ createNew, handleToggle, handleClose, handleChange, handleSubmit, user:{userName,first,mid,last,email,phone,active} }) => {
+export default ({ editUser, handleClose, handleChange, handleSubmit, user:{userName,first,mid,last,email,phone,active} }) => {
     return <Fragment>
-        <EditIcon onClick={handleToggle} color='primary'></EditIcon>
         <Dialog
-            open={createNew}
+            open={editUser}
             onClose={handleClose}
         >
             <DialogTitle id="alert-dialog-title">{"Edit User"}</DialogTitle>
@@ -23,15 +21,15 @@ export default ({ createNew, handleToggle, handleClose, handleChange, handleSubm
             </DialogContentText>
             <form>
                 <TextField label='User Name' value={userName} onChange={handleChange('userName')} margin='normal'/>
-                <br/>
+                &nbsp;
                 <TextField label='First Name' value={first} onChange={handleChange('first')} margin='normal'/>
                 <br/>
                 <TextField label='Middle Name' value={mid} margin='normal' onChange={handleChange('mid')} />
-                <br/>
+                &nbsp;
                 <TextField label='Last Name' value={last} margin='normal' onChange={handleChange('last')} />
                 <br/>
                 <TextField label='Email' value={email} margin='normal' onChange={handleChange('email')} />
-                <br/>
+                &nbsp;
                 <TextField label='Phone' value={phone} margin='normal' onChange={handleChange('phone')} />
                 <br/>
                 <TextField label='Active' value={active} margin='normal' onChange={handleChange('active')} />

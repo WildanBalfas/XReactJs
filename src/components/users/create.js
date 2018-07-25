@@ -22,15 +22,15 @@ export default ({ createNew, handleToggle, handleClose, handleChange, handleSubm
             </DialogContentText>
             <form>
                 <TextField label='User Name' value={userName} onChange={handleChange('userName')} margin='normal'/>
-                <br/>
+                &nbsp;
                 <TextField label='First Name' value={first} onChange={handleChange('first')} margin='normal'/>
                 <br/>
                 <TextField label='Middle Name' value={mid} margin='normal' onChange={handleChange('mid')} />
-                <br/>
+                &nbsp;
                 <TextField label='Last Name' value={last} margin='normal' onChange={handleChange('last')} />
                 <br/>
                 <TextField label='Email' value={email} margin='normal' onChange={handleChange('email')} />
-                <br/>
+                &nbsp;
                 <TextField label='Phone' value={phone} margin='normal' onChange={handleChange('phone')} />
                 <br/>
                 <TextField label='Active' value={active} margin='normal' onChange={handleChange('active')} />

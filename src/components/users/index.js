@@ -6,8 +6,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
 import DelIcon from '@material-ui/icons/Delete';
-import Create from './create';
-import Edit from './edit';
+import CreateUser from './create';
+import EditUser from './edit';
+import DeleteUser from './delete';
 import IconButton from '@material-ui/core/IconButton';
 
 export default class extends React.Component {
@@ -60,23 +61,30 @@ export default class extends React.Component {
 
             ],
             createNew: false,
-            user: { userName: '', first: '', mid: '', last: '', email: '', phone: '', active: '' }
+            editUser: false,
+            deletUser: false,
+            user: { _id: 0, userName: '', first: '', mid: '', last: '', email: '', phone: '', active: '' }
         }
 
     }
-
+    //toggle
     handleToggle = () => {
         this.setState({
-            createNew: !this.state.createNew
+            createNew: true
         })
     }
+    //hapus data
 
+    //tutup
     handleClose = () => {
         this.setState({
-            createNew: !this.state.createNew
+            createNew: false,
+            editUser: false,
+            deleteUser: false,
+            user: { _id: 0, userName: '', first: '', mid: '', last: '', email: '', phone: '', active: '' }
         })
     }
-
+    //bisa diketik
     handleChange = name => ({ target: { value } }) => {
         this.setState({
             user: {
@@ -85,16 +93,15 @@ export default class extends React.Component {
             }
         })
     }
-
-    handleDelete = (n) => {
-        this.state.users.splice(n, 1);
-        this.setState(this.state.users);
-    }
+    //submit data
 
     handleSubmit = () => {
-        const { user } = this.state;
+        const { user, users, createNew } = this.state;
+        const newId = parseInt(users[users.length - 1]._id) + 1;
 
-        let newUser = {
+        let newUser =
+        {
+            _id: createNew ? newId : user._id,
             userName: user.userName,
             name: {
                 first: user.first,
@@ -106,35 +113,93 @@ export default class extends React.Component {
             active: user.active
         }
 
-        let users = this.state.users;
-
-        users.push(newUser);
+        if (createNew) {
+            users.push(newUser)
+        } else {
+            let idx = users.findIndex(u => u._id === newUser._id);
+            users[idx] = newUser;
+        }
 
         this.setState({
             createNew: false,
-            user: { userName: '', first: '', mid: '', last: '', email: '', phone: '', active: '' },
+            editUser: false,
+            user: { _id: 0, userName: '', first: '', mid: '', last: '', email: '', phone: '', active: '' },
             users: users
+        })
+
+
+    }
+
+    handleEdit = (_id) => {
+        const { users } = this.state;
+        const user = users.find(u => u._id === _id);
+        // console.log(user);
+        this.setState({
+            editUser: true,
+            user: {
+                _id: user._id,
+                userName: user.userName,
+                first: user.name.first,
+                mid: user.name.mid,
+                last: user.name.last,
+                email: user.email,
+                phone: user.phone,
+                active: user.active
+            }
+        })
+    }
+
+    handleDelete = (_id) => {
+        const { users } = this.state;
+        const user = users.find(u => u._id === _id);
+        this.setState({
+            deleteUser: true,
+            user: {
+                _id: user._id,
+                userName: user.userName,
+                first: user.name.first,
+                mid: user.name.mid,
+                last: user.name.last,
+                email: user.email,
+                phone: user.phone,
+                active: user.active
+            }
+        })
+    }
+
+    handleDeleteConfirm = () => {
+        const { users, user } = this.state;
+        let idx = users.findIndex(u => u._id === user._id)
+        users.splice(idx, 1);
+        this.setState({
+            deleteUser: false,
+            user: { _id: 0, userName: '', first: '', mid: '', last: '', email: '', phone: '', active: '' }
         })
 
     }
 
     render() {
         const users = this.state.users;
-
         return (
             <div>
-                <h3>List Of Users</h3>
-                <Create createNew={this.state.createNew} handleToggle={this.handleToggle}
-                    handleClose={this.handleClose} handleChange={this.handleChange} user={this.state.user}
-                    handleSubmit={this.handleSubmit} />
-                <Table >
+                <h3><center>List Of Users</center></h3>
+
+                <CreateUser createNew={this.state.createNew} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleSubmit={this.handleSubmit} user={this.state.user} />
+
+                <EditUser editUser={this.state.editUser} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleSubmit={this.handleSubmit} user={this.state.user} />
+
+                <DeleteUser deleteUser={this.state.deleteUser} handleClose={this.handleClose} handleDelete={this.handleDeleteConfirm} user={this.state.user} />
+
+                <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell >Username</TableCell>
+                            <TableCell>Username</TableCell>
                             <TableCell >Name</TableCell>
                             <TableCell >Email </TableCell>
                             <TableCell >Phones </TableCell>
                             <TableCell >Active </TableCell>
+                            <TableCell >Action </TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -150,10 +215,10 @@ export default class extends React.Component {
                                     <TableCell>{n.email}</TableCell>
                                     <TableCell>{n.phone}</TableCell>
                                     <TableCell>{n.active}</TableCell>
-                                    <IconButton><Edit createNew={this.state.createNew} handleToggle={this.handleToggle}
-                                        handleClose={this.handleClose} handleChange={this.handleChange} user={this.state.user}
-                                        handleSubmit={this.handleSubmit} /></IconButton>
-                                    <IconButton><DelIcon color="primary" onClick={() => this.handleDelete(users.indexOf(n))} /></IconButton>
+                                    <TableCell>
+                                        <IconButton><EditIcon color="primary" onClick={() => this.handleEdit(n._id)} /></IconButton>
+                                        <IconButton><DelIcon color="secondary" onClick={() => this.handleDelete(n._id)} /></IconButton>
+                                    </TableCell>
                                 </TableRow>
                             );
                         })}
