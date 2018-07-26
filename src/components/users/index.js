@@ -10,14 +10,12 @@ import DeleteUser from './delete';
 import { config } from '../configs/config';
 import EditIcon from '@material-ui/icons/Edit';
 import DelIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import axios from 'axios';
-
-
 
 class Users extends React.Component {
     
@@ -44,30 +42,36 @@ class Users extends React.Component {
         }
     }
     
-    
+    //Reload
+    reloadUserData = () => {
+        axios.get(config.url + '/users')
+        .then(res =>{
+            this.setState({
+                users: res.data,
+                createNew:false,
+                editUser:false,
+                deleteUser:false,
+                user: this.userModel,
+                loading :false
+            })
+        })
+        .catch((error) => {
+            alert(error);
+        })
+    }
     
     //API connect ke cloud
     componentDidMount() {
-        axios.get(config.url + '/users')
-        .then(res => {
-            this.setState({
-                users: res.data,
-                loading: false
-            })
-        })
-        
-        .catch((error) => {
-            alert(error)
-        })
+        this.reloadUserData();
     }
     
     //toggle
     handleToggle = () => {
         this.setState({
-            createNew: true
+            createNew: true,
+            user: this.userModel
         })
     }
-    
     
     //tutup
     handleClose = () => {
@@ -106,22 +110,10 @@ class Users extends React.Component {
         }
         
         if (createNew) {
-            console.log(newUser);
             axios.post(config.url + '/users', newUser)
             .then(res => {
-                axios.get(config.url + '/users')
-                .then(res => {
-                    this.setState({
-                        users: res.data,
-                        createNew: false,
-                        user: this.userModel,
-                        loading: false
-                    })
-                    alert('New user has been saved. \n');
-                })
-                .catch((error) => {
-                    alert(error)
-                })
+                this.reloadUserData();
+                alert('User has been saved. \n');
             })
             .catch((error) => {
                 alert(error)
@@ -129,8 +121,14 @@ class Users extends React.Component {
             
             
         } else {
-            let idx = users.findIndex(u => u._id === newUser._id);
-            users[idx] = newUser;
+            axios.put(config.url + '/users/' + user._id, newUser)
+            .then(res => {
+                this.reloadUserData();
+                alert('User has been edited. \n');
+            })
+            .catch((error) => {
+                alert(error)
+            })
         }
     }
     
@@ -173,11 +171,15 @@ class Users extends React.Component {
     
     handleDeleteConfirm = () => {
         const { users, user } = this.state;
-        let idx = users.findIndex(u => u._id === user._id)
-        users.splice(idx, 1);
-        this.setState({
-            deleteUser: false,
-            user: this.userModel
+        // let idx = users.findIndex(u => u._id === user._id)
+        // users.splice(idx, 1);
+        axios.delete(config.url + '/users/' + user._id)
+        .then(res => {
+            this.reloadUserData();
+            alert('User has been deleted. \n');
+        })
+        .catch((error) => {
+            alert(error)
         })
         
     }

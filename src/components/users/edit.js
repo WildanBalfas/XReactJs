@@ -5,42 +5,43 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
+import  TextField  from '@material-ui/core/TextField';
 
 
-export default ({ editUser, handleClose, handleChange, handleSubmit, user:{userName,first,mid,last,email,phone,active} }) => {
+export default ({ editUser, handleClose, handleSubmit, handleChange, user:{userName, first, middle, last, email, phone, active} }) => {
     return <Fragment>
+
         <Dialog
             open={editUser}
             onClose={handleClose}
         >
-            <DialogTitle id="alert-dialog-title">{"Edit User"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Update User"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                   Please fill out the form below!
+                    Update this User
             </DialogContentText>
-            <form>
-                <TextField label='User Name' value={userName} onChange={handleChange('userName')} margin='normal'/>
-                &nbsp;
-                <TextField label='First Name' value={first} onChange={handleChange('first')} margin='normal'/>
-                <br/>
-                <TextField label='Middle Name' value={mid} margin='normal' onChange={handleChange('mid')} />
-                &nbsp;
-                <TextField label='Last Name' value={last} margin='normal' onChange={handleChange('last')} />
-                <br/>
-                <TextField label='Email' value={email} margin='normal' onChange={handleChange('email')} />
-                &nbsp;
-                <TextField label='Phone' value={phone} margin='normal' onChange={handleChange('phone')} />
-                <br/>
-                <TextField label='Active' value={active} margin='normal' onChange={handleChange('active')} />
-                <br/>
-            </form>
+                <form>
+                    <TextField label="Username" value ={userName} onChange={handleChange('userName')} margin='normal'/>
+                    &nbsp;
+                    <TextField label="First Name" value ={first} onChange={handleChange('first')} margin='normal'/>
+                    <br/>
+                    <TextField label="Middle Name" value ={middle} onChange={handleChange('middle')} margin='normal'/>
+                    &nbsp;
+                    <TextField label="Last Name" value ={last} onChange={handleChange('last')} margin='normal'/>
+                    <br/>
+                    <TextField label="Phone" value ={phone} onChange={handleChange('phone')} margin='normal'/>
+                    &nbsp;
+                    <TextField label="email" value ={email}  onChange={handleChange('email')} margin='normal'/>
+                    <br/>
+                    <TextField label="Active" value ={active}  onChange={handleChange('active')} margin='normal'/>
+                    <br/>
+                </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} variant='contained' color='primary'>
+                <Button onClick={handleClose} color="primary">
                     Cancel
             </Button>
-                <Button onClick={handleSubmit} variant='contained' color='primary' autoFocus>
+                <Button  onClick={handleSubmit} color="primary" autoFocus>
                     Save
             </Button>
             </DialogActions>

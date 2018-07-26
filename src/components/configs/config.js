@@ -1,5 +1,5 @@
 'use strict';
 
 export const config = {
-  url : "https://shielded-brushlands-50528.herokuapp.com/api"
+  url : "https://salty-spire-27249.herokuapp.com/api"
 }
