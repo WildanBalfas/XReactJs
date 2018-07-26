@@ -44,6 +44,7 @@ typings/
 
 # Optional eslint cache
 .eslintcache
+.eslint-disable-next-line
 
 # Optional REPL history
 .node_repl_history
