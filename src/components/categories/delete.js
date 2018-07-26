@@ -9,29 +9,21 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-export default ({ deleteUser, handleClose, handleDelete, user:{userName,first,mid,last,email,phone,active} }) => {
+export default ({ deleteCategory, handleClose, handleDelete, category:{initial,name,active} }) => {
     return <Fragment>
     <Dialog
-    open={deleteUser}
+    open={deleteCategory}
     onClose={handleClose}
     >
-    <DialogTitle id="alert-dialog-title">{"Delete User"}</DialogTitle>
+    <DialogTitle id="alert-dialog-title">{"Delete category"}</DialogTitle>
     <DialogContent>
     <DialogContentText id="alert-dialog-description">
     Are you sure to delete?
     </DialogContentText>
     <form>
-    <TextField label='User Name' value={userName}  margin='normal' disabled={true}/>
+    <TextField label='Initial' value={initial}  margin='normal' disabled={true}/>
     &nbsp;
-    <TextField label='First Name' value={first} margin='normal' disabled={true}/>
-    <br/>
-    <TextField label='Middle Name' value={mid} margin='normal' disabled={true}/>
-    &nbsp;
-    <TextField label='Last Name' value={last} margin='normal' disabled={true}/>
-    <br/>
-    <TextField label='Email' value={email} margin='normal' disabled={true}/>
-    &nbsp;
-    <TextField label='Phone' value={phone} margin='normal' disabled={true}/>
+    <TextField label='Name' value={name} margin='normal' disabled={true}/>
     <br/>
     <FormControlLabel
     control={

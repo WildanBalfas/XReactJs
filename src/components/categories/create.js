@@ -9,30 +9,22 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-export default ({ createNew,handleChangeCheckBox ,handleToggle, handleClose, handleChange, handleSubmit, user:{userName,first,mid,last,email,phone,active} }) => {
+export default ({ createNew,handleChangeCheckBox ,handleToggle, handleClose, handleChange, handleSubmit, category:{initial,name,active} }) => {
     return <Fragment>
     <Button onClick={handleToggle} variant='contained' color='primary'>Create</Button>
     <Dialog
     open={createNew}
     onClose={handleClose}
     >
-    <DialogTitle id="alert-dialog-title">{"Create new user"}</DialogTitle>
+    <DialogTitle id="alert-dialog-title">{"Create new Categories"}</DialogTitle>
     <DialogContent>
     <DialogContentText id="alert-dialog-description">
     Please fill out the form below!
     </DialogContentText>
     <form>
-    <TextField label='User Name' value={userName} onChange={handleChange('userName')} margin='normal'/>
+    <TextField label='Initial' value={initial} onChange={handleChange('initial')} margin='normal'/>
     &nbsp;
-    <TextField label='First Name' value={first} onChange={handleChange('first')} margin='normal'/>
-    <br/>
-    <TextField label='Middle Name' value={mid} margin='normal' onChange={handleChange('mid')} />
-    &nbsp;
-    <TextField label='Last Name' value={last} margin='normal' onChange={handleChange('last')} />
-    <br/>
-    <TextField label='Email' value={email} margin='normal' onChange={handleChange('email')} />
-    &nbsp;
-    <TextField label='Phone' value={phone} margin='normal' onChange={handleChange('phone')} />
+    <TextField label='Name' value={name} onChange={handleChange('name')} margin='normal'/>
     <br/>
     <FormControlLabel
     control={

@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
+import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
 class Users extends React.Component {
@@ -26,7 +26,7 @@ class Users extends React.Component {
         last: '',
         email: '',
         phone: '',
-        active: 0
+        active: true
     }
     
     
@@ -184,6 +184,15 @@ class Users extends React.Component {
         
     }
     
+    handleChangeCheckBox = name => event => {
+        this.setState({
+            user: {
+                ...this.state.user,
+                [name]: event.target.checked
+            }
+        })
+    }
+    
     render() {
         const { users, loading } = this.state;
         const { classes } = this.props;
@@ -192,9 +201,9 @@ class Users extends React.Component {
             <div>
             <h3><center>List Of Users</center></h3>
             
-            <CreateUser createNew={this.state.createNew} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleSubmit={this.handleSubmit} user={this.state.user} />
+            <CreateUser createNew={this.state.createNew} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleSubmit={this.handleSubmit} user={this.state.user} handleChangeCheckBox={this.handleChangeCheckBox} />
             
-            <EditUser editUser={this.state.editUser} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleSubmit={this.handleSubmit} user={this.state.user} />
+            <EditUser editUser={this.state.editUser} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleSubmit={this.handleSubmit} user={this.state.user} handleChangeCheckBox={this.handleChangeCheckBox} />
             
             <DeleteUser deleteUser={this.state.deleteUser} handleClose={this.handleClose} handleDelete={this.handleDeleteConfirm} user={this.state.user} />
             
@@ -209,7 +218,6 @@ class Users extends React.Component {
             <TableCell >Phones </TableCell>
             <TableCell >Active </TableCell>
             <TableCell >Action </TableCell>
-            
             </TableRow>
             </TableHead>
             <TableBody>
@@ -224,7 +232,9 @@ class Users extends React.Component {
                     (n.name.last ? n.name.last + " " : "")}</TableCell>
                     <TableCell>{n.email}</TableCell>
                     <TableCell>{n.phone}</TableCell>
-                    <TableCell>{n.active}</TableCell>
+                    <TableCell>
+                      <Checkbox checked={n.active} value="active" />
+                    </TableCell>
                     <TableCell>
                     <IconButton><EditIcon color="primary" onClick={() => this.handleEdit(n._id)} /></IconButton>
                     <IconButton><DelIcon color="secondary" onClick={() => this.handleDelete(n._id)} /></IconButton>

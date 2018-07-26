@@ -9,30 +9,22 @@ import TextField  from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-export default ({ editUser, handleChangeCheckBox ,handleClose, handleSubmit, handleChange, user:{userName, first, middle, last, email, phone, active} }) => {
+export default ({ editCategory, handleChangeCheckBox ,handleClose, handleSubmit, handleChange, category:{initial, name, active} }) => {
     return <Fragment>
     
     <Dialog
-    open={editUser}
+    open={editCategory}
     onClose={handleClose}
     >
-    <DialogTitle id="alert-dialog-title">{"Update User"}</DialogTitle>
+    <DialogTitle id="alert-dialog-title">{"Update category"}</DialogTitle>
     <DialogContent>
     <DialogContentText id="alert-dialog-description">
-    Update this User
+    Update this category
     </DialogContentText>
     <form>
-    <TextField label="Username" value ={userName} onChange={handleChange('userName')} margin='normal'/>
+    <TextField label='Initial' value={initial} onChange={handleChange('initial')} margin='normal'/>
     &nbsp;
-    <TextField label="First Name" value ={first} onChange={handleChange('first')} margin='normal'/>
-    <br/>
-    <TextField label="Middle Name" value ={middle} onChange={handleChange('middle')} margin='normal'/>
-    &nbsp;
-    <TextField label="Last Name" value ={last} onChange={handleChange('last')} margin='normal'/>
-    <br/>
-    <TextField label="Phone" value ={phone} onChange={handleChange('phone')} margin='normal'/>
-    &nbsp;
-    <TextField label="email" value ={email}  onChange={handleChange('email')} margin='normal'/>
+    <TextField label='Name' value={name} onChange={handleChange('name')} margin='normal'/>
     <br/>
     <FormControlLabel
     control={
