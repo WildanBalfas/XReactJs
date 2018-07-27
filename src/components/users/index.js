@@ -36,7 +36,7 @@ class Users extends React.Component {
             users: [],
             createNew: false,
             editUser: false,
-            deletUser: false,
+            deleteUser: false,
             loading: true,
             user: this.userModel
         }
